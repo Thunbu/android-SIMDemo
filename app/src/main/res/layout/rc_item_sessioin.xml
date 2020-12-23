@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.sammbo.imdemo.ui.tab.session.SessionItemViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="com.sammbo.imdemo.entity.SessionEntity"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_parent"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        binding:onClickCommand="@{viewModel.startChatClick}"
+        >
+
+        <com.ruffian.library.widget.RImageView
+            android:id="@+id/avatar"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="16dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_avatar_icon"
+            app:is_circle="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            binding:url="@{viewModel.entity.avatar}"
+            />
+
+        <com.sammbo.imdemo.ui.widget.CountView
+            android:id="@+id/unread_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintCircle="@id/avatar"
+            app:layout_constraintCircleAngle="45"
+            app:layout_constraintCircleRadius="30dp"
+            tools:ignore="MissingConstraints"
+            tools:text="1" />
+
+        <ImageView
+            android:id="@+id/iv_mute_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cycle_red_bg"
+            android:visibility="gone"
+            app:layout_constraintCircle="@id/avatar"
+            app:layout_constraintCircleAngle="45"
+            app:layout_constraintCircleRadius="26dp"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/top"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginRight="4dp"
+            android:src="@mipmap/session_top"
+            android:visibility="@{viewModel.entity.top == SessionEntity.TOP_Y ? View.VISIBLE : View.GONE}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#1d2221"
+            android:textSize="17dp"
+            android:text="@{viewModel.entity.sessionName}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@id/avatar"
+            app:layout_constraintRight_toLeftOf="@id/time"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="这是一个会话这是一个会话这是一个会话" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:textColor="#9A9E9E"
+            android:textSize="12dp"
+            app:sessionTime="@{viewModel.entity.dateTime}"
+            app:layout_constraintBottom_toBottomOf="@id/name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/name"
+            tools:text="11:23" />
+
+        <TextView
+            android:id="@+id/tip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="50dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#666666"
+            android:textSize="13dp"
+            android:text="@{viewModel.entity.snippet}"
+            app:layout_constraintLeft_toLeftOf="@id/name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="徐静：APP压力测试中" />
+
+        <ImageView
+            android:id="@+id/iv_mute_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="@{viewModel.entity.notDisturb == SessionEntity.NOTDISTURB_Y ? View.GONE : View.VISIBLE}"
+            android:src="@mipmap/iv_mute_notice_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="80dp"
+            android:background="#E6E6E6"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

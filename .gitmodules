@@ -1,0 +1,3 @@
+[submodule "imsdk"]
+	path = imsdk
+	url = http://gitlab.sammbo.com/android/imsdk.git

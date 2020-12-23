@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.sammbo.imdemo.ui.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"
+        tools:context=".ui.login.LoginActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"
+            />
+
+        <Spinner
+            android:id="@+id/account_select"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@id/guide"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.5"
+            binding:itemDatas="@{viewModel.defaultAccounts}"
+            binding:onItemSelectedCommand="@{viewModel.onAccountSelectorCommand}"
+            binding:valueReply="@{viewModel.account}"
+            />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:text="登录"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/guide"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.5"
+            binding:onClickCommand="@{viewModel.loginOnClickCommand}"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

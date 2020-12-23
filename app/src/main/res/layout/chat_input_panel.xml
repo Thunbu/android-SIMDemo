@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="#F8F8F8"
+        android:paddingBottom="5dp"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_chat_text_input"
+            android:maxLines="5"
+            android:minHeight="42dp"
+            android:paddingLeft="5dp"
+            android:textSize="16sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@id/emotionImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/emotionImageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"
+            android:src="@mipmap/ic_cheat_emo"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toStartOf="@id/extSwitcher"
+            app:layout_constraintTop_toTopOf="@id/editText"
+            app:layout_constraintBottom_toBottomOf="@id/editText"
+            />
+        
+        <ViewSwitcher
+            android:id="@+id/extSwitcher"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/editText"
+            app:layout_constraintBottom_toBottomOf="@id/editText"
+            >
+
+            <ImageView
+                android:id="@+id/extImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_cheat_add"
+                />
+
+            <ImageView
+                android:id="@+id/send"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_baseline_send_24"
+                />
+        </ViewSwitcher>
+
+        <com.sammbo.imdemo.ui.widget.keyboard.KeyboardHeightFrameLayout
+            android:id="@+id/emotionContainerFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_custom_keyboard_size"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/editText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="visible"
+            >
+            <!--表情-->
+            <com.lqr.emoji.EmotionLayout
+                android:id="@+id/emotionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+        </com.sammbo.imdemo.ui.widget.keyboard.KeyboardHeightFrameLayout>
+
+        <com.sammbo.imdemo.ui.widget.keyboard.KeyboardHeightFrameLayout
+            android:id="@+id/extContainerContainerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_custom_keyboard_size"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/editText"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <!--其他功能-->
+            <com.sammbo.imdemo.ui.widget.keyboard.ViewPagerFixed
+                android:id="@+id/chatExtViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.sammbo.imdemo.ui.widget.keyboard.KeyboardHeightFrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
