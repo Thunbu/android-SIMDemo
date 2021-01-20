@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.ruffian.library.widget.RLinearLayout
+        style="@style/pop_bg"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/top_text"
+            style="@style/main_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:drawableLeft="@mipmap/conversation_top"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:text="置顶" />
+
+        <View
+            android:id="@+id/divder_deal_late"
+            style="@style/line_style"
+            android:layout_marginLeft="16dp" />
+        <TextView
+            android:id="@+id/conversation_del"
+            style="@style/main_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:drawableLeft="@mipmap/conversation_del"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:text="删除" />
+
+    </com.ruffian.library.widget.RLinearLayout>
+</FrameLayout>

@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="76dp"
         binding:onClickCommand="@{viewModel.startChatClick}"
+        binding:onLongClickCommand="@{viewModel.longClick}"
         >
 
         <com.ruffian.library.widget.RImageView

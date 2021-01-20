@@ -38,7 +38,7 @@ public class SRxUtils {
     }
 
     /**
-     * 生命周期绑定
+     * 生命周期绑定y
      *
      * @param lifecycle Fragment
      */

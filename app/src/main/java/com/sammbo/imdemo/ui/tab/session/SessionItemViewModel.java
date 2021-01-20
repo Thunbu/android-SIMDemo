@@ -1,6 +1,7 @@
 package com.sammbo.imdemo.ui.tab.session;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
@@ -11,9 +12,18 @@ import com.sammbo.imdemo.ui.chat.ChatActivity;
 import me.goldze.mvvmhabit.base.ItemViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingAction;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.binding.command.BindingConsumer;
 
 public class SessionItemViewModel extends ItemViewModel<SessioinViewModel> {
     public ObservableField<SessionEntity> entity = new ObservableField<>();
+
+    public ObservableField<SessionEntity> getEntity() {
+        return entity;
+    }
+
+    public void setEntity(SessionEntity entity) {
+        this.entity.set(entity);
+    }
 
     public SessionItemViewModel(@NonNull SessioinViewModel viewModel, SessionEntity entity) {
         super(viewModel);
@@ -21,4 +31,7 @@ public class SessionItemViewModel extends ItemViewModel<SessioinViewModel> {
     }
 
     public BindingCommand startChatClick = new BindingCommand(() -> viewModel.startActivity(ChatActivity.class, ChatActivity.startParams(entity.get().getSessionId(), entity.get().getSessionName())));
+    public BindingCommand<View> longClick = new BindingCommand<View>(view -> {
+        viewModel.showMenu(view, this);
+    });
 }
