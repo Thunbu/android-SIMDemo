@@ -13,6 +13,7 @@ import com.geely.imsdk.client.manager.message.send.SIMMessageManager;
 import com.sammbo.imdemo.data.http.RetrofitClient;
 import com.sammbo.imdemo.data.http.service.SessionService;
 import com.sammbo.imdemo.entity.MessageEntity;
+import com.sammbo.imdemo.sdk.SDKManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class ChatRepository extends BaseModel {
             param.setMsgId(boundaryID);
             param.setSessionId(sessionId);
             param.setSecurityType(SIMSecType.NORMAL);
-            param.setSessionType(SIMSessionType.P2P);
+            param.setSessionType(SIMSessionType.getType(SDKManager.getInstance().getSessionType(sessionId)));
             SIMMessageManager.getInstance().getOffMsgList(param, new SIMValueCallBack<Pair<List<SIMMessage>, List<SIMMessage>>>() {
                 @Override
                 public void onError(int code, String desc) {

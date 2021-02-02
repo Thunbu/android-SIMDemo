@@ -1,6 +1,5 @@
 package com.sammbo.imdemo.ui.tab.session;
 
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -10,9 +9,7 @@ import com.sammbo.imdemo.entity.SessionEntity;
 import com.sammbo.imdemo.ui.chat.ChatActivity;
 
 import me.goldze.mvvmhabit.base.ItemViewModel;
-import me.goldze.mvvmhabit.binding.command.BindingAction;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
-import me.goldze.mvvmhabit.binding.command.BindingConsumer;
 
 public class SessionItemViewModel extends ItemViewModel<SessioinViewModel> {
     public ObservableField<SessionEntity> entity = new ObservableField<>();

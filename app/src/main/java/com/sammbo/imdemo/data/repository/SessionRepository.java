@@ -2,9 +2,13 @@ package com.sammbo.imdemo.data.repository;
 
 import com.geely.imsdk.client.bean.session.SIMSession;
 import com.geely.imsdk.client.manager.system.SIMManager;
+import com.sammbo.imdemo.data.Global;
 import com.sammbo.imdemo.data.http.RetrofitClient;
+import com.sammbo.imdemo.data.http.SBaseResponse;
+import com.sammbo.imdemo.data.http.service.AppService;
 import com.sammbo.imdemo.data.http.service.SessionService;
 import com.sammbo.imdemo.entity.SessionEntity;
+import com.sammbo.imdemo.ui.login.bean.UploadAddress;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +25,10 @@ import me.goldze.mvvmhabit.base.BaseModel;
 public class SessionRepository extends BaseModel {
 
     private volatile static SessionRepository INSTANCE = null;
+    private AppService appService;
 
     private SessionRepository(){
+        appService =  RetrofitClient.getInstance().create(AppService.class);
     }
 
     public static SessionRepository getInstance() {
@@ -52,5 +58,13 @@ public class SessionRepository extends BaseModel {
                     }
                     return null;
                 });
+    }
+
+    public void removeAccount(){
+        Global.removeAccount();
+    }
+
+    public Observable<SBaseResponse<UploadAddress>> getUploadAddress(){
+        return appService.getUploadHost();
     }
 }

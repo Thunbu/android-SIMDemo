@@ -35,6 +35,20 @@
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:text="删除" />
+        <View
+            android:id="@+id/divder_disturb"
+            style="@style/line_style"
+            android:layout_marginLeft="16dp" />
+        <TextView
+            android:id="@+id/conversation_disturb"
+            style="@style/main_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:drawableLeft="@mipmap/iv_mute_notice_grey"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:text="免打扰" />
 
     </com.ruffian.library.widget.RLinearLayout>
 </FrameLayout>

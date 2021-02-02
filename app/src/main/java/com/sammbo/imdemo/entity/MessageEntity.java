@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.databinding.BaseObservable;
 
 import com.geely.imsdk.client.bean.message.SIMMessage;
+import com.geely.imsdk.client.bean.message.elem.file.SIMFileElem;
+import com.geely.imsdk.client.bean.message.elem.group.SIMGroupTipsElem;
 import com.geely.imsdk.client.bean.message.elem.image.SIMImage;
 import com.geely.imsdk.client.bean.message.elem.image.SIMImageElem;
 import com.geely.imsdk.client.bean.message.elem.image.SIMImageType;
@@ -21,6 +23,7 @@ public class MessageEntity<T> extends BaseObservable {
     public static final int TYPE_TXT = 0;
     public static final int TYPE_IMG = 1;
     public static final int TYPE_VIDEO = 3;
+    public static final int TYPE_FILE = 4;
 
     public static final int BOX_OUT = 0;
     public static final int BOX_IN = 1;
@@ -68,21 +71,29 @@ public class MessageEntity<T> extends BaseObservable {
             case VIDEO:
                 SIMVideoElem simVideoElem = (SIMVideoElem) simMessage.getElem();
                 messageEntity.setData(VideoInfo.builder()
-                                            .videoUrl(simVideoElem.getVideoUrl())
-                                            .videoType(simVideoElem.getVideoFormat() == null ? VideoInfo.VIDEO_TYPE_UNKNOWN : simVideoElem.getVideoFormat().value())
-                                            .videoSize(simVideoElem.getVideoSize())
-                                            .duration(simVideoElem.getDuration())
-                                            .coverUrl(simVideoElem.getCoverUrl())
-                                            .coverHeight(simVideoElem.getCoverHeight())
-                                            .coverWidth(simVideoElem.getCoverWidth())
-                                            .coverSize(simVideoElem.getCoverSize())
-                                            .coverType(simVideoElem.getCoverFormat() == null ? VideoInfo.COVER_TYPE_UNKNOWN : simVideoElem.getCoverFormat().value())
-                                            .build());
+                        .videoUrl(simVideoElem.getVideoUrl())
+                        .videoType(simVideoElem.getVideoFormat() == null ? VideoInfo.VIDEO_TYPE_UNKNOWN : simVideoElem.getVideoFormat().value())
+                        .videoSize(simVideoElem.getVideoSize())
+                        .duration(simVideoElem.getDuration())
+                        .coverUrl(simVideoElem.getCoverUrl())
+                        .coverHeight(simVideoElem.getCoverHeight())
+                        .coverWidth(simVideoElem.getCoverWidth())
+                        .coverSize(simVideoElem.getCoverSize())
+                        .coverType(simVideoElem.getCoverFormat() == null ? VideoInfo.COVER_TYPE_UNKNOWN : simVideoElem.getCoverFormat().value())
+                        .build());
+                break;
+            case GROUP_CREATE:
+                SIMGroupTipsElem simGroupTipsElem = (SIMGroupTipsElem) simMessage.getElem();
+                messageEntity.setData("我创建了群");
                 break;
             case TXT:
-            default:
                 SIMTextElem textElem = (SIMTextElem) simMessage.getElem();
                 messageEntity.setData(textElem.getText());
+                break;
+            case FILE:
+                SIMFileElem fileElem = (SIMFileElem) simMessage.getElem();
+                FileInfo fileInfo = FileInfo.builder().filename(fileElem.filename).size(fileElem.size).downUrl(fileElem.downUrl).build();
+                messageEntity.setData(fileInfo);
                 break;
         }
         return messageEntity;

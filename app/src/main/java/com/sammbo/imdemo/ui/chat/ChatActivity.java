@@ -1,9 +1,11 @@
 package com.sammbo.imdemo.ui.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.sammbo.imdemo.BR;
@@ -65,5 +67,11 @@ public class ChatActivity extends SBaseActivity<ActivityChatBinding, ChatViewMod
                 binding.msgRecyclerView.scrollToPosition(viewModel.observableList.size() - 1);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        binding.inputPanel.onActivityResult(requestCode,resultCode,data);
     }
 }

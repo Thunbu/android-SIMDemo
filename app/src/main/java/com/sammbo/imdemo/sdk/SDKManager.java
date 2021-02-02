@@ -7,6 +7,7 @@ import com.geely.imsdk.client.bean.message.SIMMessage;
 import com.geely.imsdk.client.bean.message.SIMMsgType;
 import com.geely.imsdk.client.bean.message.SIMSecType;
 import com.geely.imsdk.client.bean.message.SIMSessionType;
+import com.geely.imsdk.client.bean.message.elem.file.SIMFileElem;
 import com.geely.imsdk.client.bean.message.elem.image.SIMImage;
 import com.geely.imsdk.client.bean.message.elem.image.SIMImageElem;
 import com.geely.imsdk.client.bean.message.elem.image.SIMImageFormat;
@@ -21,10 +22,13 @@ import com.geely.imsdk.client.listener.SIMValueCallBack;
 import com.geely.imsdk.client.manager.message.send.SIMMessageManager;
 import com.geely.imsdk.client.manager.system.SIMManager;
 import com.sammbo.imdemo.app.SApplication;
+import com.sammbo.imdemo.entity.FileInfo;
 import com.sammbo.imdemo.entity.ImageInfo;
 import com.sammbo.imdemo.entity.MessageEntity;
 import com.sammbo.imdemo.entity.VideoInfo;
+import com.sammbo.imdemo.entity.busevent.EventCode;
 import com.sammbo.imdemo.entity.busevent.EventConnectState;
+import com.sammbo.imdemo.entity.busevent.EventMessage;
 
 import me.goldze.mvvmhabit.bus.RxBus;
 
@@ -42,9 +46,12 @@ public class SDKManager {
         if (!SIMManager.getInstance().isInitialed()) {
             //初始化SDK
             SIMManager.getInstance().init(SApplication.getInstance(), "1000000217", new SDKConfig.Builder()
-                    .setHttpServer("https://sdktest-gateway.sammbo.com:18777/")
-                    .setTcpServerHost("wss://sdktest-websocket.sammbo.com")
-                    .setTcpServerPort(18326)
+//                    .setHttpServer("https://sdktest-gateway.sammbo.com:18777/")
+                    .setHttpServer("https://sdkdev-gateway.sammbo.com:8777/ ")
+//                    .setTcpServerHost("wss://sdktest-websocket.sammbo.com")
+                    .setTcpServerHost("wss://sdkdev-websocket.sammbo.com")
+//                    .setTcpServerPort(18326)
+                    .setTcpServerPort(8326)
                     .create());
         }
         // 已经初始化成功，直接进行注册
@@ -66,12 +73,14 @@ public class SDKManager {
         SIMMessageManager.getInstance().sendMessage(simMessage, new SIMValueCallBack<SIMMessage>() {
             @Override
             public void onError(int code, String desc) {
-
+                Log.e("Tag","send error :"+code+",desc :"+desc);
             }
 
             @Override
             public void onSuccess(SIMMessage result) {
-
+                EventMessage message=new EventMessage();
+                message.setCode(EventCode.CODE_SESSION_UPDATE);
+                RxBus.getDefault().post(message);
             }
         });
         return messageEntity;
@@ -115,12 +124,19 @@ public class SDKManager {
                 simMessage.setElem(simVideoElem);
                 break;
             case MessageEntity.TYPE_TXT:
-            default:
                 String body = (String)messageEntity.getData();
                 simMessage.setMsgType(SIMMsgType.TXT);
                 SIMTextElem elem = new SIMTextElem();
                 elem.setText(body);
                 simMessage.setElem(elem);
+            case MessageEntity.TYPE_FILE:
+                FileInfo fileInfo= (FileInfo) messageEntity.getData();
+                SIMFileElem fileElem=new SIMFileElem();
+                fileElem.setDownUrl(fileInfo.getDownUrl());
+                fileElem.setFilename(fileInfo.getFilename());
+                fileElem.setSize(fileInfo.getSize());
+                simMessage.setMsgType(SIMMsgType.FILE);
+                simMessage.setElem(fileElem);
                 break;
         }
         simMessage.setSessionId(messageEntity.getSessionId());
@@ -139,7 +155,7 @@ public class SDKManager {
         simImage.setSize(imageExt.size);
     }
 
-    private int getSessionType(String sessionId) {
+    public int getSessionType(String sessionId) {
         if (!TextUtils.isEmpty(sessionId) && !sessionId.toUpperCase().startsWith("A")) {
             return 1; // GROUP
         } else {

@@ -37,9 +37,10 @@ public class RetrofitClient {
     //缓存时间
     private static final int CACHE_TIMEOUT = 10 * 1024 * 1024;
     //服务端根路径
-    public static String baseUrl = "https://developer.sammbo.com/";
+//    public static String baseUrl = "https://developer.sammbo.com/";
+    public static String baseUrl = "http://10.86.78.55:8367/";
 
-    public static final String path = "ServerController/";
+    public static final String path = "demo";
 
     private static Context mContext = Utils.getContext();
 

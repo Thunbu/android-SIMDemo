@@ -10,6 +10,7 @@ import com.geely.imsdk.client.bean.system.SIMOffLineTip;
 import com.geely.imsdk.client.listener.SIMListener;
 import com.sammbo.imdemo.entity.MessageEntity;
 import com.sammbo.imdemo.entity.busevent.EventConnectState;
+import com.sammbo.imdemo.entity.busevent.EventMessage;
 
 import me.goldze.mvvmhabit.bus.RxBus;
 
@@ -86,6 +87,8 @@ public class ChatListener implements SIMListener {
 
     @Override
     public void onReceiveKickOff(SIMOffLineTip tip) {
-
+        EventMessage logOut = new EventMessage();
+        logOut.setCode(1);
+        RxBus.getDefault().post(logOut);
     }
 }

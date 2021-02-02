@@ -1,16 +1,12 @@
 package com.sammbo.imdemo.data.repository;
 
-import com.geely.imsdk.client.bean.session.SIMSession;
-import com.geely.imsdk.client.manager.system.SIMManager;
 import com.sammbo.imdemo.data.Global;
 import com.sammbo.imdemo.data.http.RetrofitClient;
 import com.sammbo.imdemo.data.http.SBaseResponse;
 import com.sammbo.imdemo.data.http.service.AppService;
-import com.sammbo.imdemo.entity.SessionEntity;
 import com.sammbo.imdemo.sdk.SDKManager;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.sammbo.imdemo.ui.login.bean.LoginReponse;
+import com.sammbo.imdemo.ui.login.bean.UserInfo;
 
 import io.reactivex.Observable;
 import me.goldze.mvvmhabit.base.BaseModel;
@@ -34,7 +30,7 @@ public class AppRepository extends BaseModel {
         return INSTANCE;
     }
 
-    public Observable<SBaseResponse<String>> login(String account, int terminal) {
+    public Observable<SBaseResponse<LoginReponse>> login(String account, int terminal) {
         return appService.login(account, terminal);
     }
 
@@ -42,7 +38,15 @@ public class AppRepository extends BaseModel {
         Global.setAccount(account);
     }
 
+    public String getAccount(){
+        return Global.getAccount();
+    }
+
     public void loginIM(String account, String userSign) {
         SDKManager.getInstance().loginIM(account, userSign);
+    }
+
+    public Observable<SBaseResponse<UserInfo>> register(String account,String name) {
+        return appService.register(account, name,"https://bossfs.sammbo.com/0/1/head/penguin.png");
     }
 }

@@ -17,4 +17,7 @@ public class Global {
         SPUtils.getInstance().put("account", account);
     }
 
+    public static void removeAccount(){
+        SPUtils.getInstance().remove("account");
+    }
 }

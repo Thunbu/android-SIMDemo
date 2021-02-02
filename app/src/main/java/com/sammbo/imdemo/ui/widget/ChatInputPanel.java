@@ -7,6 +7,7 @@ package com.sammbo.imdemo.ui.widget;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -260,5 +261,9 @@ public class ChatInputPanel extends FrameLayout implements IEmotionSelectedListe
          * 输入面板关闭
          */
         void onInputPanelCollapsed();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        extension.onActivityResult(requestCode,resultCode,data);
     }
 }

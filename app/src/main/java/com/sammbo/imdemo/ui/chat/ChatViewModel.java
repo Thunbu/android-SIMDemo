@@ -13,6 +13,7 @@ import com.sammbo.imdemo.BR;
 import com.sammbo.imdemo.R;
 import com.sammbo.imdemo.data.Global;
 import com.sammbo.imdemo.data.repository.ChatRepository;
+import com.sammbo.imdemo.entity.FileInfo;
 import com.sammbo.imdemo.entity.ImageInfo;
 import com.sammbo.imdemo.entity.MessageEntity;
 import com.sammbo.imdemo.entity.VideoInfo;
@@ -25,6 +26,7 @@ import com.sammbo.imdemo.ui.chat.msg.ChatTxtInViewModel;
 import com.sammbo.imdemo.ui.chat.msg.ChatTxtOutViewModel;
 import com.sammbo.imdemo.ui.chat.msg.ChatVideoInViewModel;
 import com.sammbo.imdemo.ui.chat.msg.ChatVideoOutViewModel;
+import com.sammbo.imdemo.ui.chat.msg.FileInfoViewModel;
 import com.sammbo.imdemo.utils.SRxUtils;
 import com.sammbo.imdemo.utils.event.Event;
 
@@ -32,6 +34,7 @@ import java.util.Collections;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.bus.RxBus;
@@ -47,7 +50,8 @@ public class ChatViewModel extends BaseViewModel<ChatRepository> {
     private static final int TYPE_IMG_OUT = 3;
     private static final int TYPE_VIDEO_IN = 4;
     private static final int TYPE_VIDEO_OUT = 5;
-
+    private static final int TYPE_FILE_IN = 6;
+    private static final int TYPE_FILE_OUT = 7;
     private Disposable receiveMsgDisposable;
 
     public ObservableField<String> sessionId = new ObservableField<>("");
@@ -88,6 +92,10 @@ public class ChatViewModel extends BaseViewModel<ChatRepository> {
                 itemBinding.set(BR.viewModel, R.layout.rc_item_msg_video_in);
             } else if (itemType == TYPE_VIDEO_OUT) {
                 itemBinding.set(BR.viewModel, R.layout.rc_item_msg_video_out);
+            } else if (itemType == TYPE_FILE_IN) {
+                itemBinding.set(BR.viewModel, R.layout.rc_item_msg_file_in);
+            } else if (itemType == TYPE_FILE_OUT) {
+                itemBinding.set(BR.viewModel, R.layout.rc_item_msg_file_out);
             }
         }
     });
@@ -119,7 +127,7 @@ public class ChatViewModel extends BaseViewModel<ChatRepository> {
                     if (list != null && !list.isEmpty()) {
                         Collections.reverse(list);
                         for (MessageEntity entity : list) {
-                            if (entity.getMessageId().equals(boundaryMsgId)){
+                            if (entity.getMessageId().equals(boundaryMsgId)) {
                                 continue;
                             }
                             addMessageToList(true, entity);
@@ -129,6 +137,9 @@ public class ChatViewModel extends BaseViewModel<ChatRepository> {
                         scrollToEnd.postValue(new Event<>(new Object()));
                     }
                     firstRefresh = false;
+                }, throwable -> {
+                    Log.e("Tag","fetchOfflineMsgs error :"+throwable.getMessage());
+                    refereshing.set(false);
                 }));
     }
 
@@ -151,6 +162,15 @@ public class ChatViewModel extends BaseViewModel<ChatRepository> {
                 } else {
                     itemViewModel = new ChatVideoOutViewModel(this, entity);
                     itemViewModel.multiItemType(TYPE_VIDEO_OUT);
+                }
+                break;
+            case MessageEntity.TYPE_FILE:
+                if (entity.getBoxType() == MessageEntity.BOX_IN) {
+                    itemViewModel = new FileInfoViewModel(this, entity);
+                    itemViewModel.multiItemType(TYPE_FILE_IN);
+                } else {
+                    itemViewModel = new FileInfoViewModel(this, entity);
+                    itemViewModel.multiItemType(TYPE_FILE_OUT);
                 }
                 break;
             case MessageEntity.TYPE_TXT:
@@ -193,6 +213,13 @@ public class ChatViewModel extends BaseViewModel<ChatRepository> {
         addMessageToList(false, SDKManager.getInstance().sendMessage(entity));
     }
 
+    public void sendFile(FileInfo fileInfo) {
+        MessageEntity<FileInfo> entity = create();
+        entity.setMsgType(MessageEntity.TYPE_FILE);
+        entity.setData(fileInfo);
+        addMessageToList(false, SDKManager.getInstance().sendMessage(entity));
+    }
+
     private MessageEntity create() {
         return MessageEntity.builder()
                 .sessionId(sessionId.get())
@@ -210,7 +237,7 @@ public class ChatViewModel extends BaseViewModel<ChatRepository> {
         receiveMsgDisposable = RxBus.getDefault().toObservable(MessageEntity.class)
                 .compose(SRxUtils.schedulersTransformer())
                 .subscribe(messageEntity -> {
-                    addMessageToList(false,messageEntity);
+                    addMessageToList(false, messageEntity);
                     scrollToEnd.postValue(new Event<>(new Object()));
                 });
         RxSubscriptions.add(receiveMsgDisposable);

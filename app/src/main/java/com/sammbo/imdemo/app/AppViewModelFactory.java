@@ -7,11 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.sammbo.imdemo.data.repository.AddressRepository;
 import com.sammbo.imdemo.data.repository.AppRepository;
 import com.sammbo.imdemo.data.repository.ChatRepository;
 import com.sammbo.imdemo.data.repository.SessionRepository;
 import com.sammbo.imdemo.ui.chat.ChatViewModel;
 import com.sammbo.imdemo.ui.login.LoginViewModel;
+import com.sammbo.imdemo.ui.register.RegisterViewModel;
+import com.sammbo.imdemo.ui.tab.address.AddressViewModel;
 import com.sammbo.imdemo.ui.tab.session.SessioinViewModel;
 
 public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
@@ -43,6 +46,10 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new SessioinViewModel(mApplication, SessionRepository.getInstance());
         } else if (modelClass.isAssignableFrom(ChatViewModel.class)) {
             return (T) new ChatViewModel(mApplication, ChatRepository.getInstance());
+        } else if(modelClass.isAssignableFrom(AddressViewModel.class)){
+            return (T) new AddressViewModel(mApplication, AddressRepository.getInstance());
+        } else if(modelClass.isAssignableFrom(RegisterViewModel.class)){
+            return (T) new RegisterViewModel(mApplication, AppRepository.getInstance());
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

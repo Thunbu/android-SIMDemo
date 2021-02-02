@@ -38,7 +38,7 @@ android {
 
 configurations.all {
     // check for updates every build
-    resolutionStrategy.cacheChangingModulesFor  0,'seconds'
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
 dependencies {
@@ -67,5 +67,8 @@ dependencies {
 //    implementation ('com.geely.thunbu:imsdk:1.0.2-SNAPSHOT') {
 //        changing = true
 //    }
-
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'com.leon:lfilepickerlibrary:1.8.0'
+    implementation 'com.qiniu:qiniu-android-sdk:7.6.+'
 }

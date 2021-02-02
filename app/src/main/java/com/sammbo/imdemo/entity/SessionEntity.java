@@ -13,7 +13,7 @@ import static com.geely.imsdk.client.constans.Constants.SESSION_NOT_DISTURB;
 
 @Data
 @Builder
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false, of = "sessionId")
 public class SessionEntity extends BaseObservable {
     public static final int TOP_Y = SIMSession.TOP;
     public static final int TOP_N = SIMSession.TOP_NOT;
@@ -38,13 +38,16 @@ public class SessionEntity extends BaseObservable {
             dateTime = messageEntity.getCreateTime();
             switch (messageEntity.getMsgType()) {
                 case MessageEntity.TYPE_TXT:
-                    snippet = (String)messageEntity.getData();
+                    snippet = (String) messageEntity.getData();
                     break;
                 case MessageEntity.TYPE_IMG:
                     snippet = "[图片]";
                     break;
                 case MessageEntity.TYPE_VIDEO:
                     snippet = "[视频]";
+                    break;
+                case MessageEntity.TYPE_FILE:
+                    snippet = "[文件]";
                     break;
                 default:
                     break;
@@ -66,7 +69,7 @@ public class SessionEntity extends BaseObservable {
     public void updateSnippet(MessageEntity messageEntity) {
         switch (messageEntity.getMsgType()) {
             case MessageEntity.TYPE_TXT:
-                snippet = (String)messageEntity.getData();
+                snippet = (String) messageEntity.getData();
                 break;
             case MessageEntity.TYPE_IMG:
                 snippet = "[图片]";

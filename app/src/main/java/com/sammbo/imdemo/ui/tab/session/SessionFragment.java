@@ -12,7 +12,6 @@ import com.sammbo.imdemo.R;
 import com.sammbo.imdemo.app.AppViewModelFactory;
 import com.sammbo.imdemo.app.SApplication;
 import com.sammbo.imdemo.databinding.FragmentSessionBindingImpl;
-import com.sammbo.imdemo.ui.login.LoginViewModel;
 
 import me.goldze.mvvmhabit.base.BaseFragment;
 
@@ -32,4 +31,5 @@ public class SessionFragment extends BaseFragment<FragmentSessionBindingImpl, Se
     public int initVariableId() {
         return BR.viewModel;
     }
+
 }

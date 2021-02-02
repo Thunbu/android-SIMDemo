@@ -25,7 +25,18 @@
             android:layout_height="44dp"
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退出登录"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:padding="3dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="@id/topbar"
+            app:layout_constraintTop_toTopOf="@id/topbar"
+            app:layout_constraintBottom_toBottomOf="@id/topbar"
+            binding:onClickCommand="@{viewModel.exit}"/>
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -46,7 +57,8 @@
             app:layout_constraintBottom_toBottomOf="@id/topbar"
             app:layout_constraintEnd_toEndOf="@id/topbar"
             app:layout_constraintTop_toTopOf="@id/topbar"
-            app:srcCompat="@drawable/ic_baseline_more_24" />
+            app:srcCompat="@drawable/ic_baseline_more_24"
+            binding:onClickCommand="@{viewModel.chooseMembers}"/>
 
         <View
             android:id="@+id/divide"
