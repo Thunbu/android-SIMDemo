@@ -20,6 +20,7 @@ public class SessionItemViewModel extends ItemViewModel<SessioinViewModel> {
 
     public void setEntity(SessionEntity entity) {
         this.entity.set(entity);
+        this.entity.notifyChange();
     }
 
     public SessionItemViewModel(@NonNull SessioinViewModel viewModel, SessionEntity entity) {

@@ -129,6 +129,7 @@ public class SDKManager {
                 SIMTextElem elem = new SIMTextElem();
                 elem.setText(body);
                 simMessage.setElem(elem);
+                break;
             case MessageEntity.TYPE_FILE:
                 FileInfo fileInfo= (FileInfo) messageEntity.getData();
                 SIMFileElem fileElem=new SIMFileElem();

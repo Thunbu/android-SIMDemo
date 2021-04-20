@@ -193,10 +193,14 @@ public class ChatViewModel extends BaseViewModel<ChatRepository> {
     }
 
     public void sendText(String body) {
-        MessageEntity entity = create();
-        entity.setMsgType(MessageEntity.TYPE_TXT);
-        entity.setData(body);
-        addMessageToList(false, SDKManager.getInstance().sendMessage(entity));
+        try {
+            MessageEntity entity = create();
+            entity.setMsgType(MessageEntity.TYPE_TXT);
+            entity.setData(body);
+            addMessageToList(false, SDKManager.getInstance().sendMessage(entity));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void sendImage(ImageInfo imageInfo) {
