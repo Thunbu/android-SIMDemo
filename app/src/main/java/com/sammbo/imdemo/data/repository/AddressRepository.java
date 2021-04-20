@@ -7,6 +7,7 @@ import com.geely.imsdk.client.manager.group.send.SIMGroupManagerImpl;
 import com.sammbo.imdemo.data.http.RetrofitClient;
 import com.sammbo.imdemo.data.http.SBaseResponse;
 import com.sammbo.imdemo.data.http.service.AppService;
+import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.tab.address.bean.AddressEntity;
 import com.sammbo.imdemo.ui.tab.address.bean.AddressResponse;
 
@@ -43,7 +44,7 @@ public class AddressRepository extends BaseModel {
     }
 
     public Observable<SBaseResponse<AddressResponse>> getAddressBookList(int page, int rows) {
-        return appService.getAddressList("1000000217", page, rows);
+        return appService.getAddressList(SDKManager.path + "home/getAddressBookList", SDKManager.envService.getAppId(), page, rows);
     }
 
     public void createGroup(String groupName,List<String> menmbers, SIMValueCallBack<String> callBack) {

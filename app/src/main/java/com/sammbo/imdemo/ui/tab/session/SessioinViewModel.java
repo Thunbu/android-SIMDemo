@@ -23,6 +23,8 @@ import com.sammbo.imdemo.entity.MessageEntity;
 import com.sammbo.imdemo.entity.SessionEntity;
 import com.sammbo.imdemo.entity.busevent.EventConnectState;
 import com.sammbo.imdemo.entity.busevent.EventMessage;
+import com.sammbo.imdemo.sdk.EnvService;
+import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.login.LoginActivity;
 import com.sammbo.imdemo.ui.login.bean.UploadAddress;
 import com.sammbo.imdemo.ui.tab.address.AddressActivity;
@@ -226,16 +228,22 @@ public class SessioinViewModel extends BaseViewModel<SessionRepository> {
     }
 
     private void getUploadAddress() {
-        addSubscribe(model.getUploadAddress().compose(SRxUtils.schedulersTransformer())
-                .subscribe(uploadAddressSBaseResponse -> {
-                    UploadAddress address = uploadAddressSBaseResponse.getData();
-                    if (address != null) {
-                        UploadUtils.getInstance().setToken(address.getSecurityToken());
-                        UploadUtils.getInstance().setHost(address.getSecurityDomain());
-                    }
-                }, throwable -> {
+        if(SDKManager.envService != EnvService.PRD){
+            addSubscribe(model.getUploadAddress().compose(SRxUtils.schedulersTransformer())
+                    .subscribe(uploadAddressSBaseResponse -> {
+                        UploadAddress address = uploadAddressSBaseResponse.getData();
+                        if (address != null) {
+                            UploadUtils.getInstance().setToken(address.getSecurityToken());
+                            UploadUtils.getInstance().setHost(address.getSecurityDomain());
+                        }
+                    }, throwable -> {
 
-                }));
+                    }));
+        }else {
+            //正式环境后端还没发,先写死
+            UploadUtils.getInstance().setToken("FsUSX95uOR0Wq0f50j1T2BnxcJhgwHyWr21IglCq:5PGKCjX8Y8rc8E9i-aAwMLCttR0=:eyJzY29wZSI6InNpbS1zZGsiLCJkZWFkbGluZSI6MTk3ODkyMjMyN30=");
+            UploadUtils.getInstance().setHost("http://qiniu-test.sammbo.com/");
+        }
     }
 
     public void addNewSession(SessionEntity entity) {

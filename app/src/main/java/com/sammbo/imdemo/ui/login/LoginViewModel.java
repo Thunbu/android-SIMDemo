@@ -10,6 +10,8 @@ import androidx.databinding.ObservableField;
 
 import com.sammbo.imdemo.data.repository.AppRepository;
 import com.sammbo.imdemo.entity.SpinnerItemData;
+import com.sammbo.imdemo.sdk.EnvService;
+import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.register.RegisterActivity;
 import com.sammbo.imdemo.ui.tab.MainActivity;
 import com.sammbo.imdemo.utils.SRxUtils;
@@ -49,35 +51,63 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
     @Override
     public void onCreate() {
         super.onCreate();
-        account.set("13336054213");
+        //A_8589934615是兔小虾
+        account.set(SDKManager.envService != EnvService.PRD ? "13336054213" : "A_8589934615");
     }
 
     private void login() {
         if (!TextUtils.isEmpty(account.get())) {
-            addSubscribe(model.login(account.get(), 0)
-                    .compose(SRxUtils.schedulersTransformer()) //线程调度
-                    .doOnSubscribe(disposable -> showDialog())
-                    .subscribe(response -> {
-                        dismissDialog();
-                        if (response.isOk()) {
-                            String userId = response.getData().getUserId();
-                            String userSing = response.getData().getUserSig();
-                            if (!TextUtils.isEmpty(userSing)) {
-                                model.saveAccount(userId);
-                                model.loginIM(userId, userSing);
-                                startActivity(MainActivity.class);
-                                finish();
+            if (SDKManager.envService != EnvService.PRD) {
+
+                addSubscribe(model.login(account.get(), 0)
+                        .compose(SRxUtils.schedulersTransformer()) //线程调度
+                        .doOnSubscribe(disposable -> showDialog())
+                        .subscribe(response -> {
+                            dismissDialog();
+                            if (response.isOk()) {
+                                String userId = response.getData().getUserId();
+                                String userSing = response.getData().getUserSig();
+                                if (!TextUtils.isEmpty(userSing)) {
+                                    model.saveAccount(userId);
+                                    model.loginIM(userId, userSing);
+                                    startActivity(MainActivity.class);
+                                    finish();
+                                } else {
+                                    uc.toastEvent.setValue("登录失败");
+                                }
                             } else {
-                                uc.toastEvent.setValue("登录失败");
+                                uc.toastEvent.setValue(response.getMessage());
                             }
-                        } else {
-                            uc.toastEvent.setValue(response.getMessage());
-                        }
-                    }, e -> {
-                        e.printStackTrace();
-                        dismissDialog();
-                        uc.toastEvent.setValue("网络错误");
-                    }));
+                        }, e -> {
+                            e.printStackTrace();
+                            dismissDialog();
+                            uc.toastEvent.setValue("网络错误");
+                        }));
+            } else {
+                addSubscribe(model.loginPrd(account.get(), 0)
+                        .compose(SRxUtils.schedulersTransformer()) //线程调度
+                        .doOnSubscribe(disposable -> showDialog())
+                        .subscribe(response -> {
+                            dismissDialog();
+                            if (response.isOk()) {
+                                String userSing = response.getData();
+                                if (!TextUtils.isEmpty(userSing)) {
+                                    model.saveAccount(account.get());
+                                    model.loginIM(account.get(), userSing);
+                                    startActivity(MainActivity.class);
+                                    finish();
+                                } else {
+                                    uc.toastEvent.setValue("登录失败");
+                                }
+                            } else {
+                                uc.toastEvent.setValue(response.getMessage());
+                            }
+                        }, e -> {
+                            e.printStackTrace();
+                            dismissDialog();
+                            uc.toastEvent.setValue("网络错误");
+                        }));
+            }
         }
     }
 

@@ -31,14 +31,18 @@ public class AppRepository extends BaseModel {
     }
 
     public Observable<SBaseResponse<LoginReponse>> login(String account, int terminal) {
-        return appService.login(account, terminal);
+        return appService.login(SDKManager.path + "home/userLogin", account, terminal);
+    }
+
+    public Observable<SBaseResponse<String>> loginPrd(String userid, int terminal) {
+        return appService.loginPrd(SDKManager.path + "home/userSig", userid, terminal);
     }
 
     public void saveAccount(String account) {
         Global.setAccount(account);
     }
 
-    public String getAccount(){
+    public String getAccount() {
         return Global.getAccount();
     }
 
@@ -47,6 +51,6 @@ public class AppRepository extends BaseModel {
     }
 
     public Observable<SBaseResponse<UserInfo>> register(String account,String name) {
-        return appService.register(account, name,"https://bossfs.sammbo.com/0/1/head/penguin.png");
+        return appService.register(SDKManager.path + "home/register", account, name, "https://bossfs.sammbo.com/0/1/head/penguin.png");
     }
 }

@@ -34,9 +34,14 @@ import me.goldze.mvvmhabit.bus.RxBus;
 
 public class SDKManager {
     public static final String TAG = "SDKManager";
+    public static final EnvService envService = EnvService.PRD;//环境改这里
+    public static String path = envService.equals(EnvService.PRD) ? "" : "demo/";
 
     private static SDKManager INSTANCE = new SDKManager();
-    private SDKManager(){}
+
+    private SDKManager() {
+    }
+
     public static SDKManager getInstance() {
         return INSTANCE;
     }
@@ -45,13 +50,10 @@ public class SDKManager {
         // 判断SDK是否已经初始化
         if (!SIMManager.getInstance().isInitialed()) {
             //初始化SDK
-            SIMManager.getInstance().init(SApplication.getInstance(), "1000000217", new SDKConfig.Builder()
-//                    .setHttpServer("https://sdktest-gateway.sammbo.com:18777/")
-                    .setHttpServer("https://sdkdev-gateway.sammbo.com:8777/ ")
-//                    .setTcpServerHost("wss://sdktest-websocket.sammbo.com")
-                    .setTcpServerHost("wss://sdkdev-websocket.sammbo.com")
-//                    .setTcpServerPort(18326)
-                    .setTcpServerPort(8326)
+            SIMManager.getInstance().init(SApplication.getInstance(), envService.getAppId(), new SDKConfig.Builder()
+                    .setHttpServer(envService.getHttpServer())
+                    .setTcpServerHost(envService.getTcpServerHost())
+                    .setTcpServerPort(envService.getTcpServerPort())
                     .create());
         }
         // 已经初始化成功，直接进行注册
@@ -162,5 +164,9 @@ public class SDKManager {
         } else {
             return 0; // p2p
         }
+    }
+
+    public void logout() {
+        SIMManager.getInstance().logout();
     }
 }

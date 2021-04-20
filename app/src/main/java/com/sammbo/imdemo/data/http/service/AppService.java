@@ -1,20 +1,16 @@
 package com.sammbo.imdemo.data.http.service;
 
-import com.sammbo.imdemo.data.http.RetrofitClient;
 import com.sammbo.imdemo.data.http.SBaseResponse;
 import com.sammbo.imdemo.ui.login.bean.LoginReponse;
 import com.sammbo.imdemo.ui.login.bean.UploadAddress;
 import com.sammbo.imdemo.ui.login.bean.UserInfo;
-import com.sammbo.imdemo.ui.tab.address.bean.AddressEntity;
 import com.sammbo.imdemo.ui.tab.address.bean.AddressResponse;
 
-import java.util.List;
-
 import io.reactivex.Observable;
-import me.goldze.mvvmhabit.http.BaseResponse;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * @author xin.zhou4
@@ -23,15 +19,20 @@ import retrofit2.http.Query;
  * description：
  */
 public interface AppService {
-    @POST(RetrofitClient.path + "/home/userLogin")
-    Observable<SBaseResponse<LoginReponse>> login(@Query("loginParam") String account, @Query("terminalCode") int terminal);
+    @POST
+    Observable<SBaseResponse<LoginReponse>> login(@Url String url, @Query("loginParam") String account, @Query("terminalCode") int terminal);
 
-    @POST(RetrofitClient.path + "/home/register")
-    Observable<SBaseResponse<UserInfo>> register(@Query("mobile") String mobile, @Query("userName") String userName, @Query("avatar") String avatar);
+    @POST
+    Observable<SBaseResponse<String>> loginPrd(@Url String url, @Query("userId") String account, @Query("terminalCode") int terminal);
 
-    @POST(RetrofitClient.path + "/home/getAddressBookList")
-    Observable<SBaseResponse<AddressResponse>> getAddressList(@Query("appId") String appId, @Query("page") int page, @Query("rows") int rows);
+    @POST
+    Observable<SBaseResponse<UserInfo>> register(@Url String url, @Query("mobile") String mobile, @Query("userName") String userName, @Query("avatar") String avatar);
 
-    @GET(RetrofitClient.path + "/home/getPolicyEncrypt")
-    Observable<SBaseResponse<UploadAddress>> getUploadHost();
+    @POST
+    Observable<SBaseResponse<AddressResponse>> getAddressList(@Url String url, @Query("appId") String appId, @Query("page") int page, @Query("rows") int rows);
+
+    @GET
+    Observable<SBaseResponse<UploadAddress>> getUploadHost(@Url String url);
+
+
 }

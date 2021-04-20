@@ -3,6 +3,9 @@ package com.sammbo.imdemo.data.http;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.sammbo.imdemo.BuildConfig;
+import com.sammbo.imdemo.sdk.SDKManager;
+
 import java.io.File;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -37,10 +40,7 @@ public class RetrofitClient {
     //缓存时间
     private static final int CACHE_TIMEOUT = 10 * 1024 * 1024;
     //服务端根路径
-//    public static String baseUrl = "https://developer.sammbo.com/";
-    public static String baseUrl = "http://10.86.78.55:8367/";
-
-    public static final String path = "demo";
+    public static String baseUrl = SDKManager.envService.getAppServer();
 
     private static Context mContext = Utils.getContext();
 
@@ -88,7 +88,7 @@ public class RetrofitClient {
                 .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
                 .addInterceptor(new LoggingInterceptor
                         .Builder()//构建者模式
-//                        .loggable(BuildConfig.DEBUG) //是否开启日志打印
+                        .loggable(BuildConfig.DEBUG) //是否开启日志打印
                         .setLevel(Level.BASIC) //打印的等级
                         .log(Platform.INFO) // 打印类型
                         .request("Request") // request的Tag

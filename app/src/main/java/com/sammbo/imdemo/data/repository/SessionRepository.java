@@ -8,6 +8,7 @@ import com.sammbo.imdemo.data.http.SBaseResponse;
 import com.sammbo.imdemo.data.http.service.AppService;
 import com.sammbo.imdemo.data.http.service.SessionService;
 import com.sammbo.imdemo.entity.SessionEntity;
+import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.login.bean.UploadAddress;
 
 import java.util.ArrayList;
@@ -65,6 +66,6 @@ public class SessionRepository extends BaseModel {
     }
 
     public Observable<SBaseResponse<UploadAddress>> getUploadAddress(){
-        return appService.getUploadHost();
+        return appService.getUploadHost(SDKManager.path + "home/getPolicyEncrypt");
     }
 }

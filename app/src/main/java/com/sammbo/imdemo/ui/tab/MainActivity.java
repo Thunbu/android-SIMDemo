@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.sammbo.imdemo.BR;
 import com.sammbo.imdemo.R;
 import com.sammbo.imdemo.databinding.ActivityMainBinding;
+import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.SBaseActivity;
 import com.sammbo.imdemo.ui.tab.address.AddressFragment;
 import com.sammbo.imdemo.ui.tab.session.SessionFragment;
@@ -95,5 +96,11 @@ public class MainActivity extends SBaseActivity<ActivityMainBinding, BaseViewMod
             }
         }
         transaction.commitAllowingStateLoss();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SDKManager.getInstance().logout();
     }
 }
