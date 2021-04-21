@@ -47,7 +47,7 @@ public class MainActivity extends SBaseActivity<ActivityMainBinding, BaseViewMod
         mFragments = new ArrayList<>();
         mFragments.add(new SessionFragment());
         mFragments.add(new AddressFragment());
-        mFragments.add(new MineFragment());
+//        mFragments.add(new MineFragment());
         //默认选中第一个
         commitAllowingStateLoss(0);
     }
@@ -56,7 +56,7 @@ public class MainActivity extends SBaseActivity<ActivityMainBinding, BaseViewMod
         NavigationController navigationController = binding.pagerBottomTab.material()
                 .addItem(R.drawable.ic_baseline_message_24, "消息")
                 .addItem(R.drawable.ic_baseline_people_24, "通讯录")
-                .addItem(R.drawable.ic_baseline_info_24, "我的")
+//                .addItem(R.drawable.ic_baseline_info_24, "我的")
                 .build();
         //底部按钮的点击事件监听
         navigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {

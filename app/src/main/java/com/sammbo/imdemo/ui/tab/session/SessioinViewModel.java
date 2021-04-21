@@ -32,6 +32,7 @@ import com.sammbo.imdemo.ui.widget.ConversationMenu;
 import com.sammbo.imdemo.utils.SRxUtils;
 import com.sammbo.imdemo.utils.UploadUtils;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import me.goldze.mvvmhabit.base.BaseViewModel;
@@ -188,6 +189,7 @@ public class SessioinViewModel extends BaseViewModel<SessionRepository> {
                     updateSessions();
                 });
         eventEessageDisposable = RxBus.getDefault().toObservable(EventMessage.class)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(message -> {
                     int code = message.getCode();
                     if (code == CODE_LOGIN_OUT) {
@@ -195,6 +197,8 @@ public class SessioinViewModel extends BaseViewModel<SessionRepository> {
                     } else if (code == CODE_SESSION_UPDATE) {
                         updateSessions();
                     }
+                }, throwable -> {
+
                 });
         RxSubscriptions.add(connectStateDisposable);
         RxSubscriptions.add(receiveMsgDisposable);
