@@ -51,40 +51,40 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
     @Override
     public void onCreate() {
         super.onCreate();
-        //A_8589934615是兔小虾
-        account.set(SDKManager.envService != EnvService.PRD ? "13336054213" : "A_8589934615");
+        //A_8589934624是汪大称
+        account.set("A_8589934616");
     }
 
     private void login() {
         if (!TextUtils.isEmpty(account.get())) {
-            if (SDKManager.envService != EnvService.PRD) {
-
+//            if (SDKManager.envService != EnvService.PRD) {
+//
+//                addSubscribe(model.login(account.get(), 0)
+//                        .compose(SRxUtils.schedulersTransformer()) //线程调度
+//                        .doOnSubscribe(disposable -> showDialog())
+//                        .subscribe(response -> {
+//                            dismissDialog();
+//                            if (response.isOk()) {
+//                                String userId = response.getData().getUserId();
+//                                String userSing = response.getData().getUserSig();
+//                                if (!TextUtils.isEmpty(userSing)) {
+//                                    model.saveAccount(userId);
+//                                    model.loginIM(userId, userSing);
+//                                    startActivity(MainActivity.class);
+//                                    finish();
+//                                } else {
+//                                    uc.toastEvent.setValue("登录失败");
+//                                }
+//                            } else {
+//                                uc.toastEvent.setValue(response.getMessage());
+//                            }
+//                        }, e -> {
+//                            e.printStackTrace();
+//                            dismissDialog();
+//                            uc.toastEvent.setValue("网络错误");
+//                        }));
+//            } else {
                 addSubscribe(model.login(account.get(), 0)
-                        .compose(SRxUtils.schedulersTransformer()) //线程调度
-                        .doOnSubscribe(disposable -> showDialog())
-                        .subscribe(response -> {
-                            dismissDialog();
-                            if (response.isOk()) {
-                                String userId = response.getData().getUserId();
-                                String userSing = response.getData().getUserSig();
-                                if (!TextUtils.isEmpty(userSing)) {
-                                    model.saveAccount(userId);
-                                    model.loginIM(userId, userSing);
-                                    startActivity(MainActivity.class);
-                                    finish();
-                                } else {
-                                    uc.toastEvent.setValue("登录失败");
-                                }
-                            } else {
-                                uc.toastEvent.setValue(response.getMessage());
-                            }
-                        }, e -> {
-                            e.printStackTrace();
-                            dismissDialog();
-                            uc.toastEvent.setValue("网络错误");
-                        }));
-            } else {
-                addSubscribe(model.loginPrd(account.get(), 0)
                         .compose(SRxUtils.schedulersTransformer()) //线程调度
                         .doOnSubscribe(disposable -> showDialog())
                         .subscribe(response -> {
@@ -108,7 +108,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                             uc.toastEvent.setValue("网络错误");
                         }));
             }
-        }
+//        }
     }
 
     public void toRegister() {

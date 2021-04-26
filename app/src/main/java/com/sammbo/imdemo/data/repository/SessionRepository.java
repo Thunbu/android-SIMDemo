@@ -66,6 +66,6 @@ public class SessionRepository extends BaseModel {
     }
 
     public Observable<SBaseResponse<UploadAddress>> getUploadAddress(){
-        return appService.getUploadHost(SDKManager.path + "home/getPolicyEncrypt");
+        return appService.getUploadHost();
     }
 }

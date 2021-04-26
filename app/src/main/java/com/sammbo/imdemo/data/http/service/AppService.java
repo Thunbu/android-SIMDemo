@@ -19,20 +19,22 @@ import retrofit2.http.Url;
  * description：
  */
 public interface AppService {
-    @POST
-    Observable<SBaseResponse<LoginReponse>> login(@Url String url, @Query("loginParam") String account, @Query("terminalCode") int terminal);
+//    @POST("home/userSig")
+//    Observable<SBaseResponse<LoginReponse>> login( @Query("loginParam") String account, @Query("terminalCode") int terminal);
 
-    @POST
-    Observable<SBaseResponse<String>> loginPrd(@Url String url, @Query("userId") String account, @Query("terminalCode") int terminal);
+    @POST("home/userSig")
+    Observable<SBaseResponse<String>> login( @Query("userId") String account, @Query("terminalCode") int terminal);
 
-    @POST
-    Observable<SBaseResponse<UserInfo>> register(@Url String url, @Query("mobile") String mobile, @Query("userName") String userName, @Query("avatar") String avatar);
+    @POST("home/register")
+    Observable<SBaseResponse<UserInfo>> register( @Query("mobile") String mobile, @Query("userName") String userName, @Query("avatar") String avatar);
 
-    @POST
-    Observable<SBaseResponse<AddressResponse>> getAddressList(@Url String url, @Query("appId") String appId, @Query("page") int page, @Query("rows") int rows);
+    @POST("home/getAddressBookList")
+    Observable<SBaseResponse<AddressResponse>> getAddressList( @Query("appId") String appId, @Query("page") int page, @Query("rows") int rows);
 
-    @GET
-    Observable<SBaseResponse<UploadAddress>> getUploadHost(@Url String url);
+    @GET("home/getPolicyEncrypt")
+    Observable<SBaseResponse<UploadAddress>> getUploadHost();
+    
+    
 
 
 }

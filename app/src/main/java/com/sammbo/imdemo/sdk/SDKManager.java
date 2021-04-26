@@ -35,7 +35,6 @@ import me.goldze.mvvmhabit.bus.RxBus;
 public class SDKManager {
     public static final String TAG = "SDKManager";
     public static final EnvService envService = EnvService.PRD;//环境改这里
-    public static String path = envService.equals(EnvService.PRD) ? "" : "demo/";
 
     private static SDKManager INSTANCE = new SDKManager();
 

@@ -30,12 +30,12 @@ public class AppRepository extends BaseModel {
         return INSTANCE;
     }
 
-    public Observable<SBaseResponse<LoginReponse>> login(String account, int terminal) {
-        return appService.login(SDKManager.path + "home/userLogin", account, terminal);
-    }
+//    public Observable<SBaseResponse<LoginReponse>> login(String account, int terminal) {
+//        return appService.login(account, terminal);
+//    }
 
-    public Observable<SBaseResponse<String>> loginPrd(String userid, int terminal) {
-        return appService.loginPrd(SDKManager.path + "home/userSig", userid, terminal);
+    public Observable<SBaseResponse<String>> login(String userid, int terminal) {
+        return appService.login( userid, terminal);
     }
 
     public void saveAccount(String account) {
@@ -51,6 +51,6 @@ public class AppRepository extends BaseModel {
     }
 
     public Observable<SBaseResponse<UserInfo>> register(String account,String name) {
-        return appService.register(SDKManager.path + "home/register", account, name, "https://bossfs.sammbo.com/0/1/head/penguin.png");
+        return appService.register( account, name, "https://bossfs.sammbo.com/0/1/head/penguin.png");
     }
 }

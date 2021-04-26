@@ -44,7 +44,7 @@ public class AddressRepository extends BaseModel {
     }
 
     public Observable<SBaseResponse<AddressResponse>> getAddressBookList(int page, int rows) {
-        return appService.getAddressList(SDKManager.path + "home/getAddressBookList", SDKManager.envService.getAppId(), page, rows);
+        return appService.getAddressList( SDKManager.envService.getAppId(), page, rows);
     }
 
     public void createGroup(String groupName,List<String> menmbers, SIMValueCallBack<String> callBack) {
