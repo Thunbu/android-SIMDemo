@@ -1,27 +1,18 @@
 package com.sammbo.imdemo.ui.login;
 
 import android.app.Application;
-import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.sammbo.imdemo.data.repository.AppRepository;
-import com.sammbo.imdemo.entity.SpinnerItemData;
-import com.sammbo.imdemo.sdk.EnvService;
-import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.register.RegisterActivity;
 import com.sammbo.imdemo.ui.tab.MainActivity;
 import com.sammbo.imdemo.utils.SRxUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
-import me.goldze.mvvmhabit.binding.viewadapter.spinner.IKeyAndValue;
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 
 /**

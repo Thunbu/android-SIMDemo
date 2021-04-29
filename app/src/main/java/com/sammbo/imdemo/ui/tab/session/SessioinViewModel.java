@@ -244,7 +244,6 @@ public class SessioinViewModel extends BaseViewModel<SessionRepository> {
 
                     }));
         }else {
-            //正式环境后端还没发,先写死
             UploadUtils.getInstance().setToken("FsUSX95uOR0Wq0f50j1T2BnxcJhgwHyWr21IglCq:5PGKCjX8Y8rc8E9i-aAwMLCttR0=:eyJzY29wZSI6InNpbS1zZGsiLCJkZWFkbGluZSI6MTk3ODkyMjMyN30=");
             UploadUtils.getInstance().setHost("http://qiniu-test.sammbo.com/");
         }
