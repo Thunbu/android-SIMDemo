@@ -10,8 +10,6 @@ import io.reactivex.functions.Consumer;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
 /**
- * author : wangqiang
- * e-mail : qiang.wang12@geely.com
  * time   : 2021/01/20
  * desc   :
  * version:

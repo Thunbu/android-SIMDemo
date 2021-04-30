@@ -8,7 +8,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author xin.zhou4
  * @since 2020/4/13
  */
 @Retention(RetentionPolicy.RUNTIME)

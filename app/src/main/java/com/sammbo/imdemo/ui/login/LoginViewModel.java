@@ -16,9 +16,7 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 
 /**
- * @author xin.zhou4
  * @date 2020/10/30
- * email：xin.zhou4@geely.com
  * description：
  */
 public class LoginViewModel extends BaseViewModel<AppRepository> {

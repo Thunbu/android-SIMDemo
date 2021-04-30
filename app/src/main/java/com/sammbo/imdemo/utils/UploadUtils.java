@@ -15,8 +15,6 @@ import java.io.File;
 import io.reactivex.Single;
 
 /**
- * author : wangqiang
- * e-mail : qiang.wang12@geely.com
  * time   : 2021/01/27
  * desc   :
  * version:
