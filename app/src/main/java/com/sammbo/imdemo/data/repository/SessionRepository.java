@@ -18,9 +18,7 @@ import io.reactivex.Observable;
 import me.goldze.mvvmhabit.base.BaseModel;
 
 /**
- * @author xin.zhou4
  * @date 2020/11/2
- * email：xin.zhou4@geely.com
  * description：
  */
 public class SessionRepository extends BaseModel {

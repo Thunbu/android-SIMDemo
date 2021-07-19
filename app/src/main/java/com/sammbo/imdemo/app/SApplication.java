@@ -22,9 +22,7 @@ import me.goldze.mvvmhabit.crash.CaocConfig;
 import me.goldze.mvvmhabit.utils.KLog;
 
 /**
- * @author xin.zhou4
  * @date 2020/10/30
- * email：xin.zhou4@geely.com
  * description：
  */
 public class SApplication extends BaseApplication {

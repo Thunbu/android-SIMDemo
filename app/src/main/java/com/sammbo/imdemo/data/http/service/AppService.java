@@ -13,9 +13,7 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 /**
- * @author xin.zhou4
  * @date 2020/10/30
- * email：xin.zhou4@geely.com
  * description：
  */
 public interface AppService {

@@ -13,8 +13,6 @@ import com.sammbo.imdemo.ui.SBaseActivity;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 /**
- * author : wangqiang
- * e-mail : qiang.wang12@geely.com
  * time   : 2021/01/26
  * desc   :
  * version:

@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * author : wangqiang
- * e-mail : qiang.wang12@geely.com
  * time   : 2021/01/27
  * desc   :
  * version:

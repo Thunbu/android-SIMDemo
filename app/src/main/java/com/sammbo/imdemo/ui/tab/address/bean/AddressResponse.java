@@ -5,8 +5,6 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * author : wangqiang
- * e-mail : qiang.wang12@geely.com
  * time   : 2021/01/29
  * desc   :
  * version:

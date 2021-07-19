@@ -6,9 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * @author xin.zhou4
  * @date 2020/12/14
- * email：xin.zhou4@geely.com
  * description：
  */
 @Data

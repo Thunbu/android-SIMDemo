@@ -9,8 +9,6 @@ import com.sammbo.imdemo.R;
 import com.sammbo.imdemo.ui.SBaseActivity;
 
 /**
- * author : wangqiang
- * e-mail : qiang.wang12@geely.com
  * time   : 2021/01/29
  * desc   :
  * version:

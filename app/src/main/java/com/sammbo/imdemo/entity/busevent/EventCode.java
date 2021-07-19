@@ -1,8 +1,6 @@
 package com.sammbo.imdemo.entity.busevent;
 
 /**
- * author : wangqiang
- * e-mail : qiang.wang12@geely.com
  * time   : 2021/02/01
  * desc   :
  * version:

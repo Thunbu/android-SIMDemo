@@ -10,9 +10,7 @@ import com.sammbo.imdemo.data.Global;
 import com.sammbo.imdemo.entity.MessageEntity;
 
 /**
- * @author xin.zhou4
  * @date 2020/12/11
- * email：xin.zhou4@geely.com
  * description：
  */
 public interface IAdapter {
