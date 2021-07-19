@@ -59,7 +59,7 @@ public class SDKManager {
         SIMManager.getInstance().setSIMListener(new ChatListener());
         SIMManager.getInstance().setSIMConnectListener(connectListener);
         // 登录
-        SIMManager.getInstance().login(userId, userSig, null);
+        SIMManager.getInstance().login(userId, userSig, null,null);
     }
 
     private SIMConnectListener connectListener = (state, error) -> {

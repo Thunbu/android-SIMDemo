@@ -91,4 +91,9 @@ public class ChatListener implements SIMListener {
         logOut.setCode(1);
         RxBus.getDefault().post(logOut);
     }
+
+    @Override
+    public void onReceiveRedpacket(SIMMessage simMessage) {
+
+    }
 }

@@ -33,8 +33,8 @@ public class SessionEntity extends BaseObservable {
     public static SessionEntity get(SIMSession simSession) {
         String snippet = "";
         long dateTime = 0;
-        if (simSession.getLastSIMMsg() != null) {
-            MessageEntity messageEntity = MessageEntity.get(simSession.getLastSIMMsg());
+        if (simSession.getLashSIMMsg() != null) {
+            MessageEntity messageEntity = MessageEntity.get(simSession.getLashSIMMsg());
             dateTime = messageEntity.getCreateTime();
             switch (messageEntity.getMsgType()) {
                 case MessageEntity.TYPE_TXT:
