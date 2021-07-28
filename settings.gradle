@@ -1,6 +1,6 @@
 include ':libPush'
 include ':app',
         ':Lib_imsdk',
-        ':emojilibrary'
+//        ':emojilibrary'
 rootProject.name = "SIM-demo"
 project(':Lib_imsdk').projectDir = new File('imsdk/app')

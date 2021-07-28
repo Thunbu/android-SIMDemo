@@ -41,13 +41,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     // 个推sdk
-    compileOnly  'com.getui:gtsdk:3.1.4.0'
-    compileOnly  'com.getui:gtc:3.1.0.0'
+    api  'com.getui:gtsdk:3.1.4.0'
+    implementation  'com.getui:gtc:3.1.0.0'
     // 根据所需厂商选择集成
-    compileOnly  "com.getui.opt:hwp:3.1.0"
-    compileOnly  "com.getui.opt:xmp:3.0.2"
-    compileOnly  "com.getui.opt:mzp:3.0.2"
-    compileOnly  "com.assist-v3:vivo:3.0.3"
-    compileOnly  "com.assist-v3:oppo:3.0.3"
+    implementation  "com.getui.opt:hwp:3.1.0"
+    implementation  "com.getui.opt:xmp:3.0.2"
+    implementation  "com.getui.opt:mzp:3.0.2"
+    implementation  "com.assist-v3:vivo:3.0.3"
+    implementation  "com.assist-v3:oppo:3.0.3"
 
 }
