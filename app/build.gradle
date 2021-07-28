@@ -72,7 +72,6 @@ configurations.all {
 dependencies {
     implementation fileTree(include: ['*.aar'], dir: 'libs')
     implementation project(':emojilibrary')
-//    implementation project(':libPush')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.annotation:annotation:1.1.0'
@@ -100,12 +99,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     implementation 'com.leon:lfilepickerlibrary:1.8.0'
     implementation 'com.qiniu:qiniu-android-sdk:7.6.+'
-    implementation  'com.getui:gtsdk:3.1.4.0'
-    implementation  'com.getui:gtc:3.1.0.0'
-    // 根据所需厂商选择集成
-    implementation  "com.getui.opt:hwp:3.1.0"
-    implementation  "com.getui.opt:xmp:3.0.2"
-    implementation  "com.getui.opt:mzp:3.0.2"
-    implementation  "com.assist-v3:vivo:3.0.3"
-    implementation  "com.assist-v3:oppo:3.0.3"
+    //离线推送
+    //    implementation project(':libPush')
+    implementation 'com.github.Thunbu:android-SIMDemo:1.0.0'
 }
