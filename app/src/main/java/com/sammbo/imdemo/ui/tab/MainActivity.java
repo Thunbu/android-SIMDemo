@@ -1,15 +1,21 @@
 package com.sammbo.imdemo.ui.tab;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.geely.imsdk.client.listener.SIMCallBack;
+import com.geely.imsdk.client.manager.device.SIMDeviceManager;
+import com.geely.libpush.MyPushManager;
 import com.sammbo.imdemo.BR;
 import com.sammbo.imdemo.R;
 import com.sammbo.imdemo.databinding.ActivityMainBinding;
 import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.SBaseActivity;
+import com.sammbo.imdemo.ui.chat.ChatActivity;
 import com.sammbo.imdemo.ui.tab.address.AddressFragment;
 import com.sammbo.imdemo.ui.tab.session.SessionFragment;
 import com.sammbo.imdemo.ui.tab.mine.MineFragment;
@@ -41,6 +47,25 @@ public class MainActivity extends SBaseActivity<ActivityMainBinding, BaseViewMod
         initFragment();
         //初始化底部Button
         initBottomTab();
+        checkPush();
+    }
+
+    /**
+     * 解析推送
+     * */
+    private void checkPush() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String fromType = bundle.getString("fromType");
+            String title = bundle.getString("title");
+            String session = bundle.getString("session");
+            //推送通知栏过来的跳转
+            if (!TextUtils.isEmpty(session) && TextUtils.equals("push", fromType)) {
+                viewModel.startActivity(ChatActivity.class, ChatActivity.startParams(session, title));
+                getIntent().putExtra("fromType", "");
+                getIntent().putExtra("session", "");
+            }
+        }
     }
 
     private void initFragment() {
@@ -101,6 +126,5 @@ public class MainActivity extends SBaseActivity<ActivityMainBinding, BaseViewMod
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SDKManager.getInstance().logout();
     }
 }

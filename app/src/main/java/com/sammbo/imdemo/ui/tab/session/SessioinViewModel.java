@@ -226,6 +226,7 @@ public class SessioinViewModel extends BaseViewModel<SessionRepository> {
     }
 
     private void exitLogin() {
+        SDKManager.getInstance().logout();
         model.removeAccount();
         startActivity(LoginActivity.class);
         finish();

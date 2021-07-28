@@ -6,7 +6,9 @@ package com.sammbo.imdemo.sdk;
  * @Date: 2021/4/20 20:16
  */
 public enum EnvService {
-    PRD("https://sdk-gateway.sammbo.com:8777", "wss://sdk-websocket.sammbo.com", 8326, "https://developer.sammbo.com/DLSP-PROD/", "1000000217");
+//    PRD("https://sdk-gateway.sammbo.com:8777", "wss://sdk-websocket.sammbo.com", 8326, "https://developer.sammbo.com/DLSP-PROD/", "1000000217");
+//PRD("https://sdkdev-gateway.sammbo.com:8777/", "wss://sdkdev-websocket.sammbo.com", 8326, "http://10.86.78.55:8367/demo/", "1000000217");
+PRD("https://sdktest-gateway.sammbo.com:18777/", "wss://sdktest-websocket.sammbo.com", 18326, "https://developer.sammbo.com/ServerController/", "1000000217");
     private final String httpServer;
     private final String tcpServerHost;
     private final int tcpServerPort;

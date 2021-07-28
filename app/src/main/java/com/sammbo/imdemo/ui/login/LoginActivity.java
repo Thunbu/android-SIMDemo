@@ -1,5 +1,6 @@
 package com.sammbo.imdemo.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +13,7 @@ import com.sammbo.imdemo.databinding.ActivityLoginBinding;
 import com.sammbo.imdemo.sdk.EnvService;
 import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.SBaseActivity;
+import com.sammbo.imdemo.ui.tab.MainActivity;
 
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
@@ -38,6 +40,14 @@ public class LoginActivity extends SBaseActivity<ActivityLoginBinding, LoginView
     public void initViewObservable() {
         super.initViewObservable();
         viewModel.uc.toastEvent.observe(this, s -> ToastUtils.showShort(s));
+        viewModel.uc.startAct.observe(this, v -> {
+            //推送传值,跳会话前一定要先连接im
+            Intent intent = new Intent(this, MainActivity.class);
+            if (getIntent().getExtras() != null) {
+                intent.putExtras(getIntent().getExtras());
+            }
+            startActivity(intent);
+        });
     }
 
     @Override

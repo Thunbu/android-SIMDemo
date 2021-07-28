@@ -21,6 +21,7 @@ import com.geely.imsdk.client.listener.SIMConnectListener;
 import com.geely.imsdk.client.listener.SIMValueCallBack;
 import com.geely.imsdk.client.manager.message.send.SIMMessageManager;
 import com.geely.imsdk.client.manager.system.SIMManager;
+import com.geely.libpush.MyPushManager;
 import com.sammbo.imdemo.app.SApplication;
 import com.sammbo.imdemo.entity.FileInfo;
 import com.sammbo.imdemo.entity.ImageInfo;
@@ -65,6 +66,9 @@ public class SDKManager {
     private SIMConnectListener connectListener = (state, error) -> {
         Log.i(TAG, "connect state change : "  + state);
         RxBus.getDefault().post(EventConnectState.builder().state(state).result(error).build());
+        if(state == SIMConnectListener.ConnectState.CONNECT_SUCCESS){
+            MyPushManager.getInstance().uploadDeviceId();
+        }
     };
 
     public MessageEntity sendMessage(MessageEntity messageEntity) {

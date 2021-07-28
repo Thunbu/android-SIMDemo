@@ -12,6 +12,8 @@ import com.sammbo.imdemo.sdk.SDKManager;
 import com.sammbo.imdemo.ui.login.bean.UploadAddress;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -50,8 +52,10 @@ public class SessionRepository extends BaseModel {
                         if (listSIMSessions != null && !listSIMSessions.isEmpty()) {
                             List<SessionEntity> listSession = new ArrayList<>();
                             for (SIMSession simSession : listSIMSessions) {
+                                if(simSession.getLashSIMMsg() == null) continue;
                                 listSession.add(SessionEntity.get(simSession));
                             }
+                            Collections.sort(listSession, (sessionEntity, t1) -> sessionEntity.getDateTime()>t1.getDateTime()?-1:0);
                             return listSession;
                         }
                     }

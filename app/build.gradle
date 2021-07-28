@@ -15,6 +15,34 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        vectorDrawables.useSupportLibrary = true
+        manifestPlaceholders = [
+                //个推id
+                GETUI_APPID       : "7rT3PrBI9iA2M3J39qOFZ2",
+                PUSH_APPID       : "7rT3PrBI9iA2M3J39qOFZ2",
+
+                // 华为 相关应用参数
+                HUAWEI_APP_ID  : "",
+
+                // 小米相关应用参数
+                XIAOMI_APP_ID  : "2882303761519988633",
+                XIAOMI_APP_KEY : "5471998885633",
+
+                // OPPO 相关应用参数
+                OPPO_APP_KEY   : "",
+                OPPO_APP_SECRET: "",
+
+                // VIVO 相关应用参数
+                VIVO_APP_ID    : "",
+                VIVO_APP_KEY   : "",
+
+                // 魅族相关应用参数
+                MEIZU_APP_ID   : "",
+                MEIZU_APP_KEY  : ""
+        ]
+        ndk {
+            // 注意：这里需要添加项目所需 CPU 类型的最小集
+            abiFilters 'armeabi-v7a'
+        }
     }
 
     buildTypes {
@@ -44,6 +72,7 @@ configurations.all {
 dependencies {
     implementation fileTree(include: ['*.aar'], dir: 'libs')
     implementation project(':emojilibrary')
+//    implementation project(':libPush')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.annotation:annotation:1.1.0'
@@ -71,4 +100,12 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     implementation 'com.leon:lfilepickerlibrary:1.8.0'
     implementation 'com.qiniu:qiniu-android-sdk:7.6.+'
+    implementation  'com.getui:gtsdk:3.1.4.0'
+    implementation  'com.getui:gtc:3.1.0.0'
+    // 根据所需厂商选择集成
+    implementation  "com.getui.opt:hwp:3.1.0"
+    implementation  "com.getui.opt:xmp:3.0.2"
+    implementation  "com.getui.opt:mzp:3.0.2"
+    implementation  "com.assist-v3:vivo:3.0.3"
+    implementation  "com.assist-v3:oppo:3.0.3"
 }

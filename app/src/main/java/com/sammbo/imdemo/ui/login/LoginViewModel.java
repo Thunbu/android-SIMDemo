@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
+import com.sammbo.imdemo.data.Global;
 import com.sammbo.imdemo.data.repository.AppRepository;
 import com.sammbo.imdemo.ui.register.RegisterActivity;
 import com.sammbo.imdemo.ui.tab.MainActivity;
@@ -27,6 +28,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
 
     public class UIChangeObservable {
         public SingleLiveEvent<String> toastEvent = new SingleLiveEvent<>();
+        public SingleLiveEvent<Void> startAct = new SingleLiveEvent<>();
     }
 
     public LoginViewModel(@NonNull Application application, AppRepository model) {
@@ -42,6 +44,10 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
         super.onCreate();
         //A_8589934624是汪大称
         account.set("A_8589934616");
+        if(!TextUtils.isEmpty(Global.getAccount())){
+            account.set(Global.getAccount());
+            login();
+        }
     }
 
     private void login() {
@@ -83,7 +89,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                                 if (!TextUtils.isEmpty(userSing)) {
                                     model.saveAccount(account.get());
                                     model.loginIM(account.get(), userSing);
-                                    startActivity(MainActivity.class);
+                                    uc.startAct.call();
                                     finish();
                                 } else {
                                     uc.toastEvent.setValue("登录失败");

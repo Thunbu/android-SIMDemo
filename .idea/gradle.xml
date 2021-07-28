@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/emojilibrary" />
             <option value="$PROJECT_DIR$/imsdk/app" />
+            <option value="$PROJECT_DIR$/libPush" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
