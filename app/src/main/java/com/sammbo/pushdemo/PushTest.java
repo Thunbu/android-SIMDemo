@@ -1,4 +1,5 @@
-package com.sammbo.imdemo;
+package com.sammbo.pushdemo;
+
 
 
 public class PushTest {

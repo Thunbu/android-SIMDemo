@@ -1,4 +1,4 @@
-package com.sammbo.imdemo;
+package com.sammbo.pushdemo;
 
 import org.junit.Test;
 

@@ -12,9 +12,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/SIM-demo" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/imsdk/app" />
             <option value="$PROJECT_DIR$/libPush" />
           </set>
         </option>

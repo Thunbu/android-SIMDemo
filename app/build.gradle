@@ -15,30 +15,30 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        vectorDrawables.useSupportLibrary = true
-//        manifestPlaceholders = [
-//                //个推id
-//                GETUI_APPID       : "7rT3PrBI9iA2M3J39qOFZ2",
-//                PUSH_APPID       : "7rT3PrBI9iA2M3J39qOFZ2",
-//
-//                // 华为 相关应用参数
-//                HUAWEI_APP_ID  : "",
-//
-//                // 小米相关应用参数
-//                XIAOMI_APP_ID  : "2882303761519988633",
-//                XIAOMI_APP_KEY : "5471998885633",
-//
-//                // OPPO 相关应用参数
-//                OPPO_APP_KEY   : "",
-//                OPPO_APP_SECRET: "",
-//
-//                // VIVO 相关应用参数
-//                VIVO_APP_ID    : "",
-//                VIVO_APP_KEY   : "",
-//
-//                // 魅族相关应用参数
-//                MEIZU_APP_ID   : "",
-//                MEIZU_APP_KEY  : ""
-//        ]
+        manifestPlaceholders = [
+                //个推id
+                GETUI_APPID       : "7rT3PrBI9iA2M3J39qOFZ2",
+                PUSH_APPID       : "7rT3PrBI9iA2M3J39qOFZ2",
+
+                // 华为 相关应用参数
+                HUAWEI_APP_ID  : "",
+
+                // 小米相关应用参数
+                XIAOMI_APP_ID  : "2882303761519988633",
+                XIAOMI_APP_KEY : "5471998885633",
+
+                // OPPO 相关应用参数
+                OPPO_APP_KEY   : "",
+                OPPO_APP_SECRET: "",
+
+                // VIVO 相关应用参数
+                VIVO_APP_ID    : "",
+                VIVO_APP_KEY   : "",
+
+                // 魅族相关应用参数
+                MEIZU_APP_ID   : "",
+                MEIZU_APP_KEY  : ""
+        ]
 //        ndk {
 //            // 注意：这里需要添加项目所需 CPU 类型的最小集
 //            abiFilters 'armeabi-v7a'
@@ -72,7 +72,7 @@ configurations.all {
 dependencies {
     implementation fileTree(include: ['*.aar'], dir: 'libs')
 //    implementation project(':emojilibrary')
-    implementation project(':libPush')
+    api project(':libPush')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
 //    implementation 'androidx.annotation:annotation:1.1.0'
