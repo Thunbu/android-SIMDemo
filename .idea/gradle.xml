@@ -14,8 +14,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/emojilibrary" />
-            <option value="$PROJECT_DIR$/imsdk/app" />
             <option value="$PROJECT_DIR$/libPush" />
+            <option value="$PROJECT_DIR$/../thunbu2_noflutter/imsdk/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

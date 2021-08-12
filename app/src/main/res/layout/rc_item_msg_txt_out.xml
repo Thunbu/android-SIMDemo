@@ -7,6 +7,7 @@
         <variable
             name="viewModel"
             type="com.sammbo.imdemo.ui.chat.msg.ChatTxtOutViewModel" />
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,5 +62,16 @@
             app:layout_constraintHorizontal_bias="1"
             />
 
+        <ImageView
+            android:id="@+id/iv_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/chatting_item_sign_icon"
+            android:visibility="@{viewModel.showSign ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@id/content"
+            app:layout_constraintStart_toStartOf="@id/content"
+            app:layout_constraintTop_toBottomOf="@id/content"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

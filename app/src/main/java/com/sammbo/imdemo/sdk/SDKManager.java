@@ -7,6 +7,7 @@ import com.geely.imsdk.client.bean.message.SIMMessage;
 import com.geely.imsdk.client.bean.message.SIMMsgType;
 import com.geely.imsdk.client.bean.message.SIMSecType;
 import com.geely.imsdk.client.bean.message.SIMSessionType;
+import com.geely.imsdk.client.bean.message.elem.delete.SIMDeleteElem;
 import com.geely.imsdk.client.bean.message.elem.file.SIMFileElem;
 import com.geely.imsdk.client.bean.message.elem.image.SIMImage;
 import com.geely.imsdk.client.bean.message.elem.image.SIMImageElem;
@@ -23,6 +24,7 @@ import com.geely.imsdk.client.manager.message.send.SIMMessageManager;
 import com.geely.imsdk.client.manager.system.SIMManager;
 import com.geely.libpush.MyPushManager;
 import com.sammbo.imdemo.app.SApplication;
+import com.sammbo.imdemo.entity.DeleteInfo;
 import com.sammbo.imdemo.entity.FileInfo;
 import com.sammbo.imdemo.entity.ImageInfo;
 import com.sammbo.imdemo.entity.MessageEntity;
@@ -75,6 +77,7 @@ public class SDKManager {
         Log.i(TAG, "sendMessage..." + messageEntity.toString());
         SIMMessage simMessage = convertMessage(messageEntity);
         messageEntity.setMessageId(simMessage.getMsgId());
+        messageEntity.setSerialId(simMessage.getSerialId());
         SIMMessageManager.getInstance().sendMessage(simMessage, new SIMValueCallBack<SIMMessage>() {
             @Override
             public void onError(int code, String desc) {
@@ -143,6 +146,14 @@ public class SDKManager {
                 fileElem.setSize(fileInfo.getSize());
                 simMessage.setMsgType(SIMMsgType.FILE);
                 simMessage.setElem(fileElem);
+                break;
+            case MessageEntity.TYPE_DELETE:
+                DeleteInfo deleteInfo = (DeleteInfo) messageEntity.getData();
+                SIMDeleteElem simDeleteElem = new SIMDeleteElem();
+                simDeleteElem.setMessageIds(deleteInfo.getMessageIds());
+                simDeleteElem.setSessionId(deleteInfo.getSessionId());
+                simMessage.setMsgType(SIMMsgType.DELETE);
+                simMessage.setElem(simDeleteElem);
                 break;
         }
         simMessage.setSessionId(messageEntity.getSessionId());

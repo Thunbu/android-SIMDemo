@@ -1,7 +1,5 @@
 package com.sammbo.imdemo.entity;
 
-import android.util.Log;
-
 import androidx.databinding.BaseObservable;
 
 import com.geely.imsdk.client.bean.message.SIMMessage;
@@ -24,6 +22,7 @@ public class MessageEntity<T> extends BaseObservable {
     public static final int TYPE_IMG = 1;
     public static final int TYPE_VIDEO = 3;
     public static final int TYPE_FILE = 4;
+    public static final int TYPE_DELETE = 5;
 
     public static final int BOX_OUT = 0;
     public static final int BOX_IN = 1;
@@ -36,6 +35,9 @@ public class MessageEntity<T> extends BaseObservable {
     private String from;
     private String to;
     private T data;
+    private String serialId;
+    private boolean priDelFlag;
+    private boolean sign;
 
     public static MessageEntity get(SIMMessage simMessage) {
         int boxType = simMessage.getSender().equals(Global.getAccount()) ? BOX_OUT : BOX_IN;
@@ -47,6 +49,9 @@ public class MessageEntity<T> extends BaseObservable {
                 .createTime(simMessage.getPacketTime())
                 .from(simMessage.getSender())
                 .to(simMessage.getReceiver())
+                .serialId(simMessage.getSerialId())
+                .priDelFlag(simMessage.isPriDelFlag())
+                .sign(simMessage.isSign())
                 .build();
         switch (simMessage.getMsgType()) {
             case IMAGE:
@@ -92,7 +97,7 @@ public class MessageEntity<T> extends BaseObservable {
                 break;
             case FILE:
                 SIMFileElem fileElem = (SIMFileElem) simMessage.getElem();
-                FileInfo fileInfo = FileInfo.builder().filename(fileElem.filename).size(fileElem.size).downUrl(fileElem.downUrl).build();
+                FileInfo fileInfo = FileInfo.builder().filename(fileElem.getFilename()).size(fileElem.getSize()).downUrl(fileElem.getDownUrl()).build();
                 messageEntity.setData(fileInfo);
                 break;
         }

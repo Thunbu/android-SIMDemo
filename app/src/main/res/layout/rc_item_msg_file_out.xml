@@ -9,6 +9,7 @@
             type="com.sammbo.imdemo.ui.chat.msg.FileInfoViewModel" />
 
         <import type="com.sammbo.imdemo.utils.FileUtils" />
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,6 +94,18 @@
                     tools:text="86k" />
             </LinearLayout>
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/chatting_item_sign_icon"
+            android:visibility="@{viewModel.showSign ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@id/chatting_content"
+            app:layout_constraintStart_toStartOf="@id/chatting_content"
+            app:layout_constraintTop_toBottomOf="@id/chatting_content"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

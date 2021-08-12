@@ -12,5 +12,8 @@
     <string name="title_activity_conversation">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="im_delete_msg">删除</string>
+    <string name="im_sign_msg">标记</string>
+    <string name="im_unsign_msg">取消标记</string>
 
 </resources>

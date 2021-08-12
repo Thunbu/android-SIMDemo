@@ -102,4 +102,6 @@ dependencies {
     //离线推送
     //    implementation project(':libPush')
     implementation 'com.github.Thunbu:android-SIMDemo:1.0.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
+//    implementation project(":Lib_imsdk")
 }

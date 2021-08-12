@@ -47,7 +47,9 @@ public class ChatActivity extends SBaseActivity<ActivityChatBinding, ChatViewMod
         Bundle bundle = getIntent().getExtras();
         viewModel.sessionId.set(bundle.getString(SESSION_ID));
         viewModel.sessionName.set(bundle.getString(SESSION_NAME));
-        binding.setAdapter(new MsgBindingRecyclerViewAdapter());
+        MsgBindingRecyclerViewAdapter adapter = new MsgBindingRecyclerViewAdapter();
+        adapter.setChatWindow(binding.msgRecyclerView);
+        binding.setAdapter(adapter);
         binding.inputPanel.init(this, viewModel, binding.rootLayout);
         binding.inputPanel.setupChat(bundle.getString(SESSION_ID));
         binding.msgRecyclerView.setOnTouchListener(new View.OnTouchListener() {
